@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.G YUN. ARCHITECTS</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #imga {
+            -webkit-filter: grayscale(100%);
+            filter: gray;
+        }
+            #imga:hover {
+                -webkit-filter: grayscale(0%);
+                filter: none;
+            }
+        .thumb {
+            display: block;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            position:relative;
+        }
+        *{
+            margin:0;
+            padding:0;
+        }
+        #imga {
+            width:100%;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="thumb">
+        <a id="atag"><img id="imga" /></a>
+    </div>
+    <script>
+        //https://chicken-moo.com/yun-archi/himg?src=사진이름&link=링크
+        
+        var splink = getParam('link').replace(/`/gi, '=');
+        splink = splink.replace(/~/gi, '&');
+        document.getElementById('imga').src = 'img/projects/' + splink.split('=')[3] + '/0.jpg';
+        document.getElementById('atag').href = 'javascript:parent.change_parent_url("' + splink + '");';
+        
+        function getParam(sname) {
+            var params = location.search.substr(location.search.indexOf("?") + 1);
+            
+            var sval = "";
+            params = params.split("&");
+            for (var i = 0; i < params.length; i++) {
+                temp = params[i].split("=");
+                if ([temp[0]] == sname) { sval = temp[1]; }
+            }
+            return decodeURI(sval);
+        }
+    </script>
+</body>
+</html>

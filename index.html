@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.G YUN. ARCHITECTS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+        <div style="width: 310rem; margin-top: 20rem;">
+            <a class="asdf" href="javascript:changIframe('project');" style="color:rgba(70, 77, 153, 255);">D.G. YUN-ARCHITECTS</a>
+            <br>
+            <div class="sans">
+                <a class="asdf1" href="javascript:changIframe('project');" style="color:rgba(70, 77, 153, 255);">디자인그룹윤건축사사무소</a>
+            </div>
+            
+        <Br>
+        <table class="menu">
+            <tr>
+                <td style="text-align: left;">
+                    <a id="about" href="javascript:changIframe('about');" class="menu_txt" style="margin-left: 0;" name="bcm">ABOUT</a>
+                </td>
+                <td>
+                    <a id="project" href="javascript:changIframe('project');" class="menu_txt" style="color: black;" name="bcm">PROJECT</a>
+                </td>
+                <td style=" text-align: right;">
+                    <a id="contact" href="javascript:changIframe('contact');" class="menu_txt" style="margin-right: 0;" name="bcm">CONTACT</a>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <br>
+        
+    </center>
+    <iframe id="ifm" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+    <script>
+        function getParam(sname) {
+            var params = location.search.substr(location.search.indexOf("?") + 1);
+            var sval = "";
+            params = params.split("&");
+            for (var i = 0; i < params.length; i++) {
+                temp = params[i].split("=");
+                if ([temp[0]] == sname) { sval = temp[1]; }
+            }
+            return sval;
+        }
+        var src = getParam('tap');
+        console.log(src);
+        if(src == ''){
+            changIframe('project');
+        }
+        var iframe = document.getElementById('ifm');
+        for(var i = 0; i < 3; i++){
+                document.getElementsByName('bcm')[i].style.color = 'rgba(0, 0, 0, 0.349)';
+        }
+        document.getElementById(src).style.color = 'black';
+        iframe.src = src;
+        iframe.height = window.innerHeight;
+
+
+        function change_parent_url(url) {
+            document.location = url;
+        }
+        function changIframe(src1){
+            var nowLink = window.location.pathname;
+            location.href = nowLink + '?tap=' + src1;
+        }
+    </script>
+</body>
+</html>
