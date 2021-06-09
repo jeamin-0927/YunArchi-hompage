@@ -1,10 +1,10 @@
 @font-face {
     font-family: "L";
-    src: url("08SeoulHangangL.ttf");
+    src: url("ttf/08SeoulHangangL.ttf");
 }
 @font-face {
     font-family: "M";
-    src: url("08SeoulHangangL.ttf");
+    src: url("ttf/08SeoulHangangL.ttf");
 }
 div{
     display: inline-block;
