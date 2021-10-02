@@ -1,3 +1,8 @@
+console.log(window.location.host);
+if (window.location.host == "chicken-moo.com"){
+    location.replace("http://yun-architects.com/");
+}
+
 function getParam(sname) {
     var params = location.search.substr(location.search.indexOf("?") + 1);
     var sval = "";
