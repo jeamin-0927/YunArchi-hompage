@@ -45,8 +45,12 @@
 <body>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+    <script type="text/javascript" src="js/contact.js"></script>
+
     <div id="load">
-        <img src="https://chicken-moo.com/files/img/loading.gif" alt="loading">
+        <img src="https://ssl.gstatic.com/ui/v1/activityindicator/loading.gif" alt="loading">
     </div>
     <script>
         $(window).load(function() {
@@ -80,7 +84,7 @@
         <br />
         <div class="eeee wtp">
             <a>Map :&nbsp;</a>
-            <a target="_blank" id="ifma">전체화면으로 보기</a>
+            <a target="_blank" id="ifma" href="https://m.place.naver.com/place/1642243023/location?entry=ple&subtab=location">전체화면으로 보기</a>
 
             <br />
             <style>
@@ -108,10 +112,81 @@
                 }
             </style>
             <div id="gmap">
-                <iframe id="ifm" class="spc" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+                <div id='map' style='width: 100%; height: 100%;'></div>
+                <script>
+                    mapboxgl.accessToken = 'pk.eyJ1Ijoia2lkdGltZXMwOTI3IiwiYSI6ImNreXBtNWk5ODBiZXkyb3BtOXVvOWQ0Z3kifQ.rBLV4CY7N6-jPKNltK6ByA';
+                    var map = new mapboxgl.Map({
+                        container: 'map',
+                        center: [129.10973, 35.14377],
+                        zoom: 16.5, 
+                        style: 'mapbox://styles/mapbox/streets-v11'
+                    });
+                    mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
+                    map.addControl(new MapboxLanguage({
+                      defaultLanguage: 'ko'
+                    }));
+                    
+                    map.on('load', () => {
+                        
+
+                        // Add a data source containing GeoJSON data.
+                        map.addSource('maine', {
+                            'type': 'geojson',
+                            'data': {
+                                'type': 'Feature',
+                                'geometry': {
+                                    'type': 'Polygon',
+                                    // These coordinates outline Maine.
+                                    'coordinates': [
+                                        [
+                                            [129.109851, 35.143961],
+                                            [129.109941, 35.143914],
+                                            [129.109963, 35.143894],
+                                            [129.109908, 35.143821],
+                                            [129.109789, 35.143882],
+                                            [129.109851, 35.143961]
+                                        ]
+                                    ]
+                                }
+                            }
+                        });
+
+                        // Add a new layer to visualize the polygon.
+                        map.addLayer({
+                            'id': 'maine',
+                            'type': 'fill',
+                            'source': 'maine', // reference the data source
+                            'layout': {},
+                            'paint': {
+                                'fill-color': '#0080ff', // blue color fill
+                                'fill-opacity': 0.4
+                            }
+                        });
+                        // Add a black outline around the polygon.
+                        map.addLayer({
+                            'id': 'outline',
+                            'type': 'line',
+                            'source': 'maine',
+                            'layout': {},
+                            'paint': {
+                                'line-color': '#000',
+                                'line-width': 1
+                            }
+                        });
+
+                        const marker = new mapboxgl.Marker({
+                            color: "#ce3096",
+                            draggable: false
+                        }).setLngLat([129.109877, 35.143889])
+                            .addTo(map);
+
+                        
+                    });
+
+                    
+                </script>
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-            <script type="text/javascript" src="js/contact.js"></script>
         </div>
     </center>
 </body>
